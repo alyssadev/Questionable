@@ -1,0 +1,48 @@
+name: Build
+
+on:
+  push:
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    env:
+      DALAMUD_HOME: /tmp/dalamud
+    steps:
+      - name: Set outputs
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Download Dalamud Latest
+        run: |
+          wget https://goatcorp.github.io/dalamud-distrib/latest.zip -O ${{ env.DALAMUD_HOME }}.zip
+          unzip ${{ env.DALAMUD_HOME }}.zip -d ${{ env.DALAMUD_HOME }}
+
+      - name: Restore Project
+        run: dotnet restore /p:Configuration=Release --packages ${{ env.GITHUB_WORKSPACE }}/.nuget
+
+      - name: Test Project
+        run: dotnet test QuestPaths.JsonValidator/QuestPaths.JsonValidator.csproj -c Release --no-restore
+
+      - name: Build Project
+        run: dotnet build Questionable/Questionable.csproj -c Release -f net9.0-windows -p:DalamudLibPath=${{ env.DALAMUD_HOME }} -maxcpucount:1 --source ${{ env.GITHUB_WORKSPACE }}/.nuget --no-restore
+
+      - name: Prepare Artifacts
+        run: |
+          mv Questionable/dist/Questionable/latest.zip ./${{ github.repository_owner }}-Questionable-${{ steps.vars.outputs.sha_short }}.zip
+          mv Questionable/dist/Questionable/Questionable.json ./${{ github.repository_owner }}-Questionable-${{ steps.vars.outputs.sha_short }}.json.d13
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Questionable-${{ steps.vars.outputs.sha_short }}
+          path: ${{ github.repository_owner }}-Questionable-*
