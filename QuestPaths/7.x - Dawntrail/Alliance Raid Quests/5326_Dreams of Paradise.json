@@ -156,7 +156,7 @@
           },
           "TerritoryId": 1265,
           "InteractionType": "CompleteQuest",
-          "NextQuestId": "5327"
+          "NextQuestId": 5327
         }
       ]
     }
