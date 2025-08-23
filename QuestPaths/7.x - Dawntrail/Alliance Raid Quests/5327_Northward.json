@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/PunishXIV/Questionable/raw/refs/heads/main/QuestPaths/quest-v1.json",
+  "$schema": "https://github.com/WigglyMuffin/Questionable/raw/refs/heads/main/QuestPaths/quest-v1.json",
   "Author": "Theo",
   "QuestSequence": [
     {
@@ -119,7 +119,7 @@
             null,
             null,
             null,
-            160
+            128
           ]
         },
         {

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://github.com/PunishXIV/Questionable/raw/refs/heads/main/QuestPaths/quest-v1.json",
+  "$schema": "https://github.com/WigglyMuffin/Questionable/raw/refs/heads/main/QuestPaths/quest-v1.json",
   "Author": "Theo",
   "QuestSequence": [
     {
@@ -156,7 +156,7 @@
           },
           "TerritoryId": 1265,
           "InteractionType": "CompleteQuest",
-          "NextQuestId": "5327"
+          "NextQuestId": 5327
         }
       ]
     }
