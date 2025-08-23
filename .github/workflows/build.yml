@@ -29,13 +29,13 @@ jobs:
           unzip ${{ env.DALAMUD_HOME }}.zip -d ${{ env.DALAMUD_HOME }}
 
       - name: Restore Project
-        run: dotnet restore /p:Configuration=Release --packages ${{ env.GITHUB_WORKSPACE }}/.nuget
+        run: dotnet restore /p:Configuration=Release --packages ${{ github.workspace }}/.nuget
 
       - name: Test Project
         run: dotnet test QuestPaths.JsonValidator/QuestPaths.JsonValidator.csproj -c Release --no-restore
 
       - name: Build Project
-        run: dotnet build Questionable/Questionable.csproj -c Release -f net9.0-windows -p:DalamudLibPath=${{ env.DALAMUD_HOME }} -maxcpucount:1 --source ${{ env.GITHUB_WORKSPACE }}/.nuget --no-restore
+        run: dotnet build Questionable/Questionable.csproj -c Release -f net9.0-windows -p:DalamudLibPath=${{ env.DALAMUD_HOME }} -maxcpucount:1 --source ${{ github.workspace }}/.nuget --no-restore
 
       - name: Prepare Artifacts
         run: |
