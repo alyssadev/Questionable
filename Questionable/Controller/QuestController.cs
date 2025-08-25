@@ -231,6 +231,20 @@ internal sealed class QuestController : MiniTaskController<QuestController>
             }
         }
 
+        // check level stop condition
+        // stops immediately instead of quest stop after completion of quest
+        if (_configuration.Stop.Enabled && _configuration.Stop.LevelToStopAfter && _clientState.LocalPlayer != null)
+        {
+            int currentLevel = _clientState.LocalPlayer.Level;
+            if (currentLevel >= _configuration.Stop.TargetLevel && IsRunning)
+            {
+                _logger.LogInformation("Reached level stop condition (level: {CurrentLevel}, target: {TargetLevel})", currentLevel, _configuration.Stop.TargetLevel);
+                _chatGui.Print($"Reached or exceeded target level {_configuration.Stop.TargetLevel}.", CommandHandler.MessageTag, CommandHandler.TagColor);
+                Stop($"Level stop condition reached [{currentLevel}]");
+                return;
+            }
+        }
+
         if (AutomationType == EAutomationType.Automatic &&
             (_taskQueue.AllTasksComplete || _taskQueue.CurrentTaskExecutor?.CurrentTask is WaitAtEnd.WaitQuestAccepted)
             && CurrentQuest is { Sequence: 0, Step: 0 } or { Sequence: 0, Step: 255 }
