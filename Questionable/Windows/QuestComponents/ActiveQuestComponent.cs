@@ -190,7 +190,7 @@ internal sealed partial class ActiveQuestComponent
                     ImGui.TextColored(ImGuiColors.DalamudRed, "Disabled");
                 }
 
-                bool hasLevelCondition = _configuration.Stop.LevelToStopAfter;
+                bool hasLevelCondition = _configuration.Stop.Enabled && _configuration.Stop.LevelToStopAfter;
                 bool hasQuestConditions = _configuration.Stop.Enabled &&
                     _configuration.Stop.QuestsToStopAfter.Any(x => !_questFunctions.IsQuestComplete(x) && !_questFunctions.IsQuestUnobtainable(x));
 
