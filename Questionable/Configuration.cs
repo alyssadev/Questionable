@@ -59,6 +59,7 @@ internal sealed class Configuration : IPluginConfiguration
         public bool RunInstancedContentWithAutoDuty { get; set; }
         public HashSet<uint> WhitelistedDutyCfcIds { get; set; } = [];
         public HashSet<uint> BlacklistedDutyCfcIds { get; set; } = [];
+        public Dictionary<string, bool> ExpansionHeaderStates { get; set; } = [];
     }
 
     internal sealed class SinglePlayerDutyConfiguration
