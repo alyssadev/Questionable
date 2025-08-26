@@ -82,7 +82,7 @@ internal sealed class PriorityWindow : LWindow
         if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.Check, "Remove finished Quests"))
             _questController.ManualPriorityQuests.RemoveAll(q => _questFunctions.IsQuestComplete(q.Id));
         ImGui.SameLine();
-        if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.Trash, "Clear"))
+        if (ImGuiComponents.IconButtonWithText(FontAwesomeIcon.Trash, "Clear All"))
             _questController.ClearQuestPriority();
         ImGui.EndDisabled();
 
