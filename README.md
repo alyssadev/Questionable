@@ -77,7 +77,7 @@ Questionable requires the following plugins to function properly:
 
 ### Limitations
 - **Dungeons**: Certain dungeons must be completed manually or with other automation tools
-- **Single Player Duties**: Requires manual completion
+- **Single Player Duties**: Certain single player duties require manual completion
 - **Combat**: Requires a combat plugin or manual intervention
 - **Some Complex Mechanics**: May require manual intervention
 
